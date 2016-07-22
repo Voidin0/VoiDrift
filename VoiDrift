@@ -1,6 +1,8 @@
 import os
 import time
 import termcolor
+import sys
+
 
 def drift():
     global gateway
@@ -12,6 +14,20 @@ def drift():
     global inter
     inter = raw_input("Interface > ")
 drift()
+
+toolbar_width = 40
+
+sys.stdout.write("[%s]" % (" " * toolbar_width))
+sys.stdout.flush()
+sys.stdout.write("\b" * (toolbar_width+1))
+
+for i in xrange(toolbar_width):
+    time.sleep(0.1) 
+    
+    sys.stdout.write(">")
+    sys.stdout.flush()
+
+sys.stdout.write("\n")
 
 os.system("""gnome-terminal -e  'bash -c "driftnet -i {inter}" ' """.format(inter=inter))
 
